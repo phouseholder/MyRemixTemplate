@@ -1,22 +1,43 @@
 {
-  "name": "",
+  "name": "MyRemixTemplate",
+  "homepage": "https://github.com/ParkerH96/MyRemixTemplate",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
-    "dev": "remix vite:dev",
+    "build": "tsc && remix vite:build",
+    "dev": "node ./server/index.js",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-    "start": "remix-serve ./build/server/index.js",
-    "typecheck": "tsc"
+    "start": "node ./server/index.js",
+    "typecheck": "tsc",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "@mantine/charts": "^7.11.2",
+    "@mantine/core": "^7.11.2",
+    "@mantine/dates": "^7.11.2",
+    "@mantine/hooks": "^7.11.2",
+    "@mantine/notifications": "^7.11.2",
+    "@remix-run/express": "^2.12.1",
     "@remix-run/node": "^2.12.1",
     "@remix-run/react": "^2.12.1",
     "@remix-run/serve": "^2.12.1",
+    "@tabler/icons-react": "^3.19.0",
+    "@tiptap/extension-link": "^2.8.0",
+    "@tiptap/pm": "^2.8.0",
+    "@tiptap/react": "^2.8.0",
+    "@tiptap/starter-kit": "^2.8.0",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.11.13",
+    "embla-carousel-react": "^7.1.0",
+    "express": "^4.21.0",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "recharts": "^2.13.0-alpha.5",
+    "remix-auth": "^3.7.0",
+    "remix-auth-form": "^1.5.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.12.1",
@@ -31,13 +52,16 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "postcss": "^8.4.38",
+    "gh-pages": "^6.1.1",
+    "postcss": "^8.4.47",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
     "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=21.0.0"
   }
 }

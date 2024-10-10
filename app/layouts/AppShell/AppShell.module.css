@@ -1,0 +1,8 @@
+.main {
+    background-color: light-dark(#ebebeb, var(--mantine-color-dark-9));
+}
+.navbar {
+    background-color: #d90202;
+    color: white;
+    font-weight: 700;
+}
