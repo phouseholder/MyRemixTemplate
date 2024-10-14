@@ -1,0 +1,1 @@
+import{j as e}from"./index-Bm35sZ9Q.js";import{M as t}from"./index-8LGOLuZy.js";import"./logo-DyuI9mun.js";import"./MantineThemeProvider-BQZ2TFrz.js";import"./px-CiO0pVtX.js";const p=()=>[{title:"New Remix App"},{name:"description",content:"Welcome to Remix!"}];function l(){return e.jsx(t,{children:e.jsx("h1",{children:"Hello World"})})}export{l as default,p as meta};

@@ -13,7 +13,7 @@ import { IconInfoCircle, IconSun, IconMoon, IconDashboard, IconUsers, IconClipbo
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { useState, useEffect } from "react";
 import { DateInput } from "@mantine/dates";
-import { AreaChart, BarChart } from "@mantine/charts";
+import { LineChart, BarChart } from "@mantine/charts";
 const ABORT_DELAY = 5e3;
 function handleRequest(request, responseStatusCode, responseHeaders, remixContext, loadContext) {
   let prohibitOutOfOrderStreaming = isBotRequest(request.headers.get("user-agent")) || remixContext.isSpaMode;
@@ -1083,14 +1083,14 @@ const icons = {
   receipt: IconReceipt2,
   coin: IconCoin
 };
-const data$1 = [
+const data = [
   { title: "Revenue", icon: "receipt", value: "13,456", diff: 34 },
   { title: "Profit", icon: "coin", value: "4,145", diff: -13 },
   { title: "Coupons usage", icon: "discount", value: "745", diff: 18 },
   { title: "New customers", icon: "user", value: "188", diff: -30 }
 ];
 function StatsGrid() {
-  const stats = data$1.map((stat) => {
+  const stats = data.map((stat) => {
     const Icon = icons[stat.icon];
     const DiffIcon = stat.diff > 0 ? IconArrowUpRight : IconArrowDownRight;
     return /* @__PURE__ */ jsxs(
@@ -1142,24 +1142,24 @@ function Dashboard() {
   return /* @__PURE__ */ jsxs(MyAppShell, { children: [
     /* @__PURE__ */ jsx(StatsGrid, {}),
     /* @__PURE__ */ jsxs(SimpleGrid, { p: "md", cols: { base: 1, md: 2 }, children: [
-      /* @__PURE__ */ jsx(Panel, { title: "Line Chart", children: /* @__PURE__ */ jsx(
-        AreaChart,
+      /* @__PURE__ */ jsx(Panel, { title: "Monthly Spending", children: /* @__PURE__ */ jsx(
+        LineChart,
         {
           h: 300,
-          data,
           dataKey: "date",
-          type: "stacked",
+          data: monthlySpending,
+          lineProps: { isAnimationActive: true },
           withLegend: true,
+          tickLine: "y",
           series,
-          curveType: "natural",
-          areaProps: { isAnimationActive: true }
+          curveType: "natural"
         }
       ) }),
-      /* @__PURE__ */ jsx(Panel, { title: "Bar Chart", children: /* @__PURE__ */ jsx(
+      /* @__PURE__ */ jsx(Panel, { title: "Monthly Spending", children: /* @__PURE__ */ jsx(
         BarChart,
         {
           h: 300,
-          data,
+          data: monthlySpending,
           dataKey: "date",
           withLegend: true,
           series,
@@ -1170,30 +1170,27 @@ function Dashboard() {
     ] })
   ] });
 }
-const data = [
-  { date: "Jan", Series1: 120, Series2: 230, Series3: 310 },
-  { date: "Feb", Series1: 180, Series2: 250, Series3: 400 },
-  { date: "Mar", Series1: 140, Series2: 310, Series3: 390 },
-  { date: "Apr", Series1: 270, Series2: 260, Series3: 420 },
-  { date: "May", Series1: 330, Series2: 390, Series3: 470 },
-  { date: "Jun", Series1: 290, Series2: 440, Series3: 520 },
-  { date: "Jul", Series1: 370, Series2: 460, Series3: 570 },
-  { date: "Aug", Series1: 410, Series2: 510, Series3: 620 },
-  { date: "Sep", Series1: 500, Series2: 480, Series3: 670 },
-  { date: "Oct", Series1: 530, Series2: 560, Series3: 720 },
-  { date: "Nov", Series1: 480, Series2: 600, Series3: 760 },
-  { date: "Dec", Series1: 620, Series2: 650, Series3: 810 }
+const monthlySpending = [
+  { date: "Jan", Parker: 1837.52, Morgan: 1138.35, Amazon: 594.27 },
+  { date: "Feb", Parker: 2052.01, Morgan: 842.14, Amazon: 383.67 },
+  { date: "Mar", Parker: 3646.41, Morgan: 3940.18, Amazon: 872.86 },
+  { date: "Apr", Parker: 1696.02, Morgan: 2638.06, Amazon: 787.11 },
+  { date: "May", Parker: 2576.3, Morgan: 1476.82, Amazon: 508.48 },
+  { date: "Jun", Parker: 1803.35, Morgan: 2406.28, Amazon: 474.13 },
+  { date: "Jul", Parker: 1510.89, Morgan: 2220.96, Amazon: 812.83 },
+  { date: "Aug", Parker: 2538.34, Morgan: 1106.96, Amazon: 397.38 },
+  { date: "Sep", Parker: 1577.03, Morgan: 3079.96, Amazon: 818.48 }
 ];
 const series = [
-  { name: "Series1", color: "indigo" },
-  { name: "Series2", color: "blue" },
-  { name: "Series3", color: "teal" }
+  { name: "Parker", color: "red" },
+  { name: "Morgan", color: "blue" },
+  { name: "Amazon", color: "yellow" }
 ];
 const route4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  data,
   default: Dashboard,
   meta: meta$2,
+  monthlySpending,
   series
 }, Symbol.toStringTag, { value: "Module" }));
 const meta$1 = () => {
@@ -1264,7 +1261,7 @@ const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   default: NotFound
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-Bynp5NC7.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/components-2haR1cev.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-UEHQ4jrq.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/components-2haR1cev.js", "/assets/MantineThemeProvider-AiyNdeD2.js", "/assets/px-CiO0pVtX.js"], "css": ["/assets/root-CeXECEkv.css"] }, "routes/auth.logout": { "id": "routes/auth.logout", "parentId": "root", "path": "auth/logout", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/auth.login": { "id": "routes/auth.login", "parentId": "root", "path": "auth/login", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-CP6p3kPr.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/logo-BJBMIdx3.js", "/assets/components-2haR1cev.js", "/assets/Group-BzWSrohI.js", "/assets/IconInfoCircle-DPWO-f9i.js", "/assets/TextInput-DiKqi-CN.js", "/assets/CloseButton-DOK_eBUn.js", "/assets/MantineThemeProvider-AiyNdeD2.js"], "css": [] }, "routes/customers": { "id": "routes/customers", "parentId": "root", "path": "customers", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-BYjo3CDb.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-BX1xLC-e.js", "/assets/index-2mA2zYzM.js", "/assets/order-B-gZVp-R.js", "/assets/components-2haR1cev.js", "/assets/logo-BJBMIdx3.js", "/assets/MantineThemeProvider-AiyNdeD2.js", "/assets/Group-BzWSrohI.js", "/assets/px-CiO0pVtX.js", "/assets/CloseButton-DOK_eBUn.js", "/assets/TextInput-DiKqi-CN.js"], "css": ["/assets/index-D9lTTDSq.css", "/assets/index-pY-vCZ97.css", "/assets/order-NuDoyHqG.css"] }, "routes/dashboard": { "id": "routes/dashboard", "parentId": "root", "path": "dashboard", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-CK0NM8_w.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/logo-BJBMIdx3.js", "/assets/Group-BzWSrohI.js", "/assets/index-BX1xLC-e.js", "/assets/MantineThemeProvider-AiyNdeD2.js", "/assets/px-CiO0pVtX.js", "/assets/index-2mA2zYzM.js"], "css": ["/assets/route-D3y8wI_6.css", "/assets/index-D9lTTDSq.css", "/assets/index-pY-vCZ97.css"] }, "routes/orders": { "id": "routes/orders", "parentId": "root", "path": "orders", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-adnzrwyy.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-BX1xLC-e.js", "/assets/index-2mA2zYzM.js", "/assets/order-B-gZVp-R.js", "/assets/components-2haR1cev.js", "/assets/Group-BzWSrohI.js", "/assets/logo-BJBMIdx3.js", "/assets/MantineThemeProvider-AiyNdeD2.js", "/assets/px-CiO0pVtX.js", "/assets/CloseButton-DOK_eBUn.js", "/assets/TextInput-DiKqi-CN.js"], "css": ["/assets/index-D9lTTDSq.css", "/assets/index-pY-vCZ97.css", "/assets/order-NuDoyHqG.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-bEK5Wbo_.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-2mA2zYzM.js", "/assets/logo-BJBMIdx3.js", "/assets/MantineThemeProvider-AiyNdeD2.js", "/assets/px-CiO0pVtX.js"], "css": ["/assets/index-pY-vCZ97.css"] }, "routes/$": { "id": "routes/$", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_-Bp3oS6iw.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-2mA2zYzM.js", "/assets/IconInfoCircle-DPWO-f9i.js", "/assets/logo-BJBMIdx3.js", "/assets/MantineThemeProvider-AiyNdeD2.js", "/assets/px-CiO0pVtX.js", "/assets/CloseButton-DOK_eBUn.js"], "css": ["/assets/index-pY-vCZ97.css"] } }, "url": "/assets/manifest-6589d031.js", "version": "6589d031" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-Bynp5NC7.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/components-2haR1cev.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-CLBhBKCs.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/components-2haR1cev.js", "/assets/MantineThemeProvider-BQZ2TFrz.js", "/assets/px-CiO0pVtX.js"], "css": ["/assets/root-B--nW1Wc.css"] }, "routes/auth.logout": { "id": "routes/auth.logout", "parentId": "root", "path": "auth/logout", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/auth.login": { "id": "routes/auth.login", "parentId": "root", "path": "auth/login", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-l34Ob9SO.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/logo-DyuI9mun.js", "/assets/components-2haR1cev.js", "/assets/Group-Cdd-C1E3.js", "/assets/IconInfoCircle-6DGJSKRT.js", "/assets/TextInput-Dps-ItdY.js", "/assets/use-id-Bg_hz8_M.js", "/assets/MantineThemeProvider-BQZ2TFrz.js", "/assets/CloseButton-uW8MGC2l.js"], "css": [] }, "routes/customers": { "id": "routes/customers", "parentId": "root", "path": "customers", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-Bcoo71Yz.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-D3Hct_Zx.js", "/assets/index-8LGOLuZy.js", "/assets/order-C_hSMfaN.js", "/assets/components-2haR1cev.js", "/assets/logo-DyuI9mun.js", "/assets/MantineThemeProvider-BQZ2TFrz.js", "/assets/Group-Cdd-C1E3.js", "/assets/px-CiO0pVtX.js", "/assets/CloseButton-uW8MGC2l.js", "/assets/use-id-Bg_hz8_M.js", "/assets/TextInput-Dps-ItdY.js"], "css": ["/assets/index-DdA71Ygt.css", "/assets/index-7JT7n3Dh.css", "/assets/order-BxZYTfya.css"] }, "routes/dashboard": { "id": "routes/dashboard", "parentId": "root", "path": "dashboard", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-D8ipCGSh.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/logo-DyuI9mun.js", "/assets/Group-Cdd-C1E3.js", "/assets/index-D3Hct_Zx.js", "/assets/MantineThemeProvider-BQZ2TFrz.js", "/assets/px-CiO0pVtX.js", "/assets/index-8LGOLuZy.js", "/assets/use-id-Bg_hz8_M.js"], "css": ["/assets/route-CrBcaUx4.css", "/assets/index-DdA71Ygt.css", "/assets/index-7JT7n3Dh.css"] }, "routes/orders": { "id": "routes/orders", "parentId": "root", "path": "orders", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/route-D5HR5Yy-.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-D3Hct_Zx.js", "/assets/index-8LGOLuZy.js", "/assets/order-C_hSMfaN.js", "/assets/components-2haR1cev.js", "/assets/Group-Cdd-C1E3.js", "/assets/logo-DyuI9mun.js", "/assets/MantineThemeProvider-BQZ2TFrz.js", "/assets/px-CiO0pVtX.js", "/assets/CloseButton-uW8MGC2l.js", "/assets/use-id-Bg_hz8_M.js", "/assets/TextInput-Dps-ItdY.js"], "css": ["/assets/index-DdA71Ygt.css", "/assets/index-7JT7n3Dh.css", "/assets/order-BxZYTfya.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-DPSJQYn_.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-8LGOLuZy.js", "/assets/logo-DyuI9mun.js", "/assets/MantineThemeProvider-BQZ2TFrz.js", "/assets/px-CiO0pVtX.js"], "css": ["/assets/index-7JT7n3Dh.css"] }, "routes/$": { "id": "routes/$", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_-BJOBfb8Y.js", "imports": ["/assets/index-Bm35sZ9Q.js", "/assets/index-8LGOLuZy.js", "/assets/IconInfoCircle-6DGJSKRT.js", "/assets/logo-DyuI9mun.js", "/assets/MantineThemeProvider-BQZ2TFrz.js", "/assets/px-CiO0pVtX.js", "/assets/CloseButton-uW8MGC2l.js", "/assets/use-id-Bg_hz8_M.js"], "css": ["/assets/index-7JT7n3Dh.css"] } }, "url": "/assets/manifest-533d5e08.js", "version": "533d5e08" };
 const mode = "production";
 const assetsBuildDirectory = "build\\client";
 const basename = "/";
