@@ -2,7 +2,7 @@ import StatsGrid from "~/components/StatsGrid";
 import Panel from "~/components/Panel";
 import MyAppShell from "~/layouts/AppShell";
 import { SimpleGrid } from "@mantine/core";
-import { AreaChart, BarChart } from "@mantine/charts";
+import { LineChart, BarChart } from "@mantine/charts";
 import { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
@@ -17,22 +17,22 @@ export default function Dashboard() {
     <MyAppShell>
       <StatsGrid />
       <SimpleGrid p="md" cols={{ base: 1, md: 2 }}>
-        <Panel title="Line Chart">
-          <AreaChart
+        <Panel title="Monthly Spending">
+          <LineChart
             h={300}
-            data={data}
             dataKey="date"
-            type="stacked"
+            data={monthlySpending}
+            lineProps={{ isAnimationActive: true }}
             withLegend
+            tickLine="y"
             series={series}
             curveType="natural"
-            areaProps={{ isAnimationActive: true }}
           />
         </Panel>
-        <Panel title="Bar Chart">
+        <Panel title="Monthly Spending">
           <BarChart
             h={300}
-            data={data}
+            data={monthlySpending}
             dataKey="date"
             withLegend
             series={series}
@@ -45,23 +45,20 @@ export default function Dashboard() {
   );
 }
 
-export const data = [
-  { date: "Jan", Series1: 120, Series2: 230, Series3: 310 },
-  { date: "Feb", Series1: 180, Series2: 250, Series3: 400 },
-  { date: "Mar", Series1: 140, Series2: 310, Series3: 390 },
-  { date: "Apr", Series1: 270, Series2: 260, Series3: 420 },
-  { date: "May", Series1: 330, Series2: 390, Series3: 470 },
-  { date: "Jun", Series1: 290, Series2: 440, Series3: 520 },
-  { date: "Jul", Series1: 370, Series2: 460, Series3: 570 },
-  { date: "Aug", Series1: 410, Series2: 510, Series3: 620 },
-  { date: "Sep", Series1: 500, Series2: 480, Series3: 670 },
-  { date: "Oct", Series1: 530, Series2: 560, Series3: 720 },
-  { date: "Nov", Series1: 480, Series2: 600, Series3: 760 },
-  { date: "Dec", Series1: 620, Series2: 650, Series3: 810 },
+export const monthlySpending = [
+  { date: "Jan", Parker: 1837.52, Morgan: 1138.35, Amazon: 594.27 },
+  { date: "Feb", Parker: 2052.01, Morgan: 842.14, Amazon: 383.67 },
+  { date: "Mar", Parker: 3646.41, Morgan: 3940.18, Amazon: 872.86 },
+  { date: "Apr", Parker: 1696.02, Morgan: 2638.06, Amazon: 787.11 },
+  { date: "May", Parker: 2576.3, Morgan: 1476.82, Amazon: 508.48 },
+  { date: "Jun", Parker: 1803.35, Morgan: 2406.28, Amazon: 474.13 },
+  { date: "Jul", Parker: 1510.89, Morgan: 2220.96, Amazon: 812.83 },
+  { date: "Aug", Parker: 2538.34, Morgan: 1106.96, Amazon: 397.38 },
+  { date: "Sep", Parker: 1577.03, Morgan: 3079.96, Amazon: 818.48 },
 ];
 
 export const series = [
-  { name: "Series1", color: "indigo" },
-  { name: "Series2", color: "blue" },
-  { name: "Series3", color: "teal" },
+  { name: "Parker", color: "red" },
+  { name: "Morgan", color: "blue" },
+  { name: "Amazon", color: "yellow" },
 ];
