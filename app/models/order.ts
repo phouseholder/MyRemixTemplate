@@ -15,7 +15,7 @@ export const orderFields: IModelField[] = [
     label: "ID",
     placeholder: "Enter ID",
     required: true,
-    type: "string",
+    type: "string"
   },
   {
     name: "ship_date",

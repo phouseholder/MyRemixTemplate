@@ -15,7 +15,6 @@ import {
   Flex,
   ScrollArea,
   Box,
-  Alert,
 } from "@mantine/core";
 import {
   IconSelector,
@@ -24,7 +23,6 @@ import {
   IconSearch,
   IconTrash,
   IconPencil,
-  IconInfoCircle,
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
 import MyModal from "../MyModal";
@@ -164,7 +162,7 @@ export function TableSort({
     setDefaultValues(row);
 
     //@ts-ignore
-    setEditID(row.id);
+    setEditID(row.id ? row.id : row.username);
     editOpen();
   };
 
@@ -173,8 +171,8 @@ export function TableSort({
     .map((row) => (
       <Table.Tr
         onClick={() => {
-          setSelectedRow(row.id);
-          onSelect ? onSelect(row.id) : undefined;
+          setSelectedRow(row.id ? row.id : row.username);
+          onSelect ? onSelect(row.id ? row.id : row.username) : undefined;
         }}
         bg={
           selectedRow === row.id ? "var(--mantine-color-red-light)" : undefined
@@ -189,7 +187,7 @@ export function TableSort({
                 variant="transparent"
                 size="sm"
                 ml="xs"
-                onClick={() => handleDelete(row.id)}
+                onClick={() => handleDelete(row.id ? row.id : row.username)}
               >
                 <IconTrash />
               </ActionIcon>
@@ -205,11 +203,9 @@ export function TableSort({
             </Flex>
           </Stack>
         </td>
-        {colDef
-          .filter((col) => col.name !== "id")
-          .map((col) => (
-            <Table.Td key={col.name}>{row[col.name]}</Table.Td>
-          ))}
+        {colDef.map((col) => (
+          <Table.Td key={col.name}>{row[col.name]}</Table.Td>
+        ))}
       </Table.Tr>
     ));
 
@@ -246,18 +242,16 @@ export function TableSort({
             <Table.Tbody>
               <Table.Tr>
                 <th></th>
-                {colDef
-                  .filter((col) => col.name !== "id")
-                  .map((col) => (
-                    <Th
-                      key={col.name}
-                      sorted={sortBy === col.name}
-                      reversed={reverseSortDirection}
-                      onSort={() => setSorting(col.name as keyof RowData)}
-                    >
-                      {col.label}
-                    </Th>
-                  ))}
+                {colDef.map((col) => (
+                  <Th
+                    key={col.name}
+                    sorted={sortBy === col.name}
+                    reversed={reverseSortDirection}
+                    onSort={() => setSorting(col.name as keyof RowData)}
+                  >
+                    {col.label}
+                  </Th>
+                ))}
               </Table.Tr>
             </Table.Tbody>
             <Table.Tbody>{rows.length > 0 ? rows : null}</Table.Tbody>

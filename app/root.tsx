@@ -8,11 +8,9 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useRouteError,
 } from "@remix-run/react";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import { theme } from "./theme";
-import Customers from "./routes/customers/route";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

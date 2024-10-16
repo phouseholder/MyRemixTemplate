@@ -6,7 +6,6 @@ import {
   ScrollArea,
   Divider,
   Button,
-  Group,
   Flex,
   useMantineColorScheme,
   useComputedColorScheme,

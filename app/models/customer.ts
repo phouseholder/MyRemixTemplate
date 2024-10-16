@@ -11,10 +11,10 @@ export interface ICustomer {
 export const customerFields: IModelField[] = [
   {
     name: "id",
-    label: "ID",
-    placeholder: "Enter ID",
+    label: "id",
+    placeholder: "Enter Username",
     required: true,
-    type: "string",
+    type: "string"
   },
   {
     name: "name",

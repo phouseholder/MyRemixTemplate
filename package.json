@@ -1,6 +1,6 @@
 {
+  "homepage": "https://phouseholder.com",
   "name": "MyRemixTemplate",
-  "homepage": "https://phouseholder.github.io/MyRemixTemplate",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -9,9 +9,7 @@
     "dev": "node ./server/index.js",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "node ./server/index.js",
-    "typecheck": "tsc",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@mantine/charts": "^7.11.2",

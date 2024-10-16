@@ -43,7 +43,9 @@ export default function Customers() {
           <Panel title="Customers">
             <TableSort
               data={customers}
-              colDef={customerFields}
+              colDef={customerFields.filter(
+                (field) => !["id"].includes(field.name)
+              )}
               createTitle="Create New Customer"
               editTitle="Edit Customer"
               onSelect={handleSelectCustomer}
@@ -54,7 +56,9 @@ export default function Customers() {
           <Panel title="Orders">
             <TableSort
               data={orders}
-              colDef={orderFields}
+              colDef={orderFields.filter(
+                (field) => !["id"].includes(field.name)
+              )}
               createTitle="Create New Order"
               editTitle="Edit Order"
               bindings={{
