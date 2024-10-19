@@ -10,7 +10,7 @@ import { update } from "./update";
 import { create } from "./create";
 
 // Base URL for PostgREST server
-const POSTGREST_URL = "http://localhost:8080";
+const POSTGREST_URL = "https://my-remix-template-vuzn-9aqf163qd-phouseholders-projects.vercel.app";
 
 // Interface for the Database structure used by PostgREST
 export interface Database {

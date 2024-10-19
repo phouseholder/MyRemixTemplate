@@ -8,13 +8,13 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://postgres:password@db:5432/postgres
+      - DATABASE_URL=postgres://default:lfBcZo57YxWz@ep-polished-feather-a4gar3ex.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require
     restart: always
 
   postgrest:
     image: postgrest/postgrest
     environment:
-      PGRST_DB_URI: postgres://postgres:password@db:5432/postgres
+      PGRST_DB_URI: postgres://default:lfBcZo57YxWz@ep-polished-feather-a4gar3ex.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require
       PGRST_SERVER_PORT: 8080
       PGRST_DB_ANON_ROLE: postgres
       PGRST_JWT_SECRET: G3qq2pVU9yVWyLjUvmyNx9MAAAI1kcTv7MbLOJBo
@@ -26,11 +26,11 @@ services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
+      POSTGRES_USER: default
+      POSTGRES_PASSWORD: lfBcZo57YxWz
+      POSTGRES_DB: verceldb
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./db/bootstrap.sql:/docker-entrypoint-initdb.d/bootstrap.sql
