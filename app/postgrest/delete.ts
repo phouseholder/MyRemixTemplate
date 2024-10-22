@@ -22,8 +22,6 @@ export async function deleteRow<T extends keyof Database["Tables"]>(
   // Combine the base URL and query string to form the full URL
   const fullUrl = `${tableString}?${queryString}`;
 
-  console.log(fullUrl);
-
   const response = await fetch(fullUrl, {
     method: "DELETE",
     headers: {
