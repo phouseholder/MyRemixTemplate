@@ -5,24 +5,20 @@ import {
   Image,
   ScrollArea,
   Divider,
-  Button,
   Flex,
-  useMantineColorScheme,
-  useComputedColorScheme,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import {
-  IconDashboard,
-  IconUsers,
   IconClipboardList,
+  IconDashboard,
   IconLogout,
-  IconSun,
-  IconMoon,
+  IconUsers,
 } from "@tabler/icons-react";
 import logo from "~/assets/img/logo.png";
-import Navbar from "./Navbar";
+import Navbar, { ILink } from "./Navbar";
 
 import classes from "./AppShell.module.css";
+import Configuration from "./Configuration";
 
 interface IMyAppShellProps {
   children: React.ReactNode;
@@ -33,40 +29,31 @@ export default function MyAppShell({ children }: IMyAppShellProps) {
 
   const isTablet = useMediaQuery("(max-width: 48em)");
 
-  const links = [
+  const footerLinks: ILink[] = [
+    {
+      to: "/auth/logout",
+      label: "Log Out",
+      icon: IconLogout,
+    },
+  ];
+
+  const links: ILink[] = [
     {
       to: "/Dashboard",
       label: "Dashboard",
-      icon: <IconDashboard size="1rem" stroke={1.5} />,
+      icon: IconDashboard,
     },
     {
       to: "/Customers",
       label: "Customers",
-      icon: <IconUsers size="1rem" stroke={1.5} />,
+      icon: IconUsers,
     },
     {
       to: "/Orders",
       label: "Orders",
-      icon: <IconClipboardList size="1rem" stroke={1.5} />,
+      icon: IconClipboardList,
     },
   ];
-
-  const footerLinks = [
-    {
-      to: "/auth/logout",
-      label: "Log Out",
-      icon: <IconLogout size="1rem" stroke={1.5} />,
-    },
-  ];
-
-  //Logic for toggling the Color Scheme
-  const { setColorScheme } = useMantineColorScheme();
-  const computedColorScheme = useComputedColorScheme("light", {
-    getInitialValueInEffect: true,
-  });
-  const toggleColorScheme = () => {
-    setColorScheme(computedColorScheme === "light" ? "dark" : "light");
-  };
 
   return (
     <AppShell
@@ -89,16 +76,7 @@ export default function MyAppShell({ children }: IMyAppShellProps) {
               hiddenFrom="sm"
               size="sm"
             />
-            {!isTablet && (
-              <Button
-                variant="outline"
-                size="sm"
-                color="red"
-                onClick={toggleColorScheme}
-              >
-                {computedColorScheme === "dark" ? <IconSun /> : <IconMoon />}
-              </Button>
-            )}
+            {!isTablet && <Configuration />}
           </Stack>
         </Flex>
       </AppShell.Header>

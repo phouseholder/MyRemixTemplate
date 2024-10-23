@@ -1,10 +1,10 @@
 import Panel from "~/components/Panel";
-import { Grid, ScrollArea, Box } from "@mantine/core";
+import { Grid } from "@mantine/core";
 import database from "~/postgrest/database";
 import MyAppShell from "~/layouts/AppShell";
 import { useLoaderData } from "@remix-run/react";
 import { ActionFunctionArgs, MetaFunction, json } from "@remix-run/node";
-import { TableSort } from "~/components/TableSort";
+import { TableSort } from "~/components";
 import { customerFields } from "~/models/customer";
 import { handleCRUD } from "~/utils/crud";
 import { orderFields } from "~/models/order";

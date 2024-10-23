@@ -25,8 +25,7 @@ import {
   IconPencil,
 } from "@tabler/icons-react";
 import classes from "./TableSort.module.css";
-import MyModal from "../MyModal";
-import MyForm from "../MyForm";
+import { MyModal, MyForm } from "~/components";
 import { useDisclosure } from "@mantine/hooks";
 import { IModelField } from "~/models";
 import { Database } from "~/postgrest/database";
@@ -106,7 +105,7 @@ interface ITableSort {
   onSelect?: (id: any) => void;
 }
 
-export function TableSort({
+export default function TableSort({
   data,
   colDef,
   createTitle = "Create New Record",
@@ -168,8 +167,9 @@ export function TableSort({
 
   const rows = sortedData
     .filter((row) => (bindings ? row[bindings.col] === bindings.val : true))
-    .map((row) => (
+    .map((row, idx) => (
       <Table.Tr
+        key={idx}
         onClick={() => {
           setSelectedRow(row.id ? row.id : row.username);
           onSelect ? onSelect(row.id ? row.id : row.username) : undefined;
@@ -177,9 +177,8 @@ export function TableSort({
         bg={
           selectedRow === row.id ? "var(--mantine-color-red-light)" : undefined
         }
-        key={row.id}
       >
-        <td>
+        <Table.Td>
           <Stack justify="center">
             <Flex justify="center">
               <ActionIcon
@@ -202,9 +201,9 @@ export function TableSort({
               </ActionIcon>
             </Flex>
           </Stack>
-        </td>
+        </Table.Td>
         {colDef.map((col) => (
-          <Table.Td key={col.name}>{row[col.name]}</Table.Td>
+          <Table.Td key={`${row.id}_${col.name}`}>{row[col.name]}</Table.Td>
         ))}
       </Table.Tr>
     ));
@@ -254,7 +253,7 @@ export function TableSort({
                 ))}
               </Table.Tr>
             </Table.Tbody>
-            <Table.Tbody>{rows.length > 0 ? rows : null}</Table.Tbody>
+            <Table.Tbody>{rows}</Table.Tbody>
           </Table>
           <MyModal title={deleteTitle} opened={delOpened} close={delClose}>
             <MyForm

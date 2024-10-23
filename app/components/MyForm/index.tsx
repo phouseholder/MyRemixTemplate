@@ -11,7 +11,7 @@ import { DateInput } from "@mantine/dates";
 import database from "~/postgrest/database";
 import { Database } from "~/postgrest/database";
 import React, { useEffect, useState } from "react";
-import { Form, useFetcher } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 
 export interface IListData {
   label: string;
@@ -75,7 +75,7 @@ function renderFields(
         switch (type) {
           case "string":
             return (
-              <Grid.Col key={name} span={6}>
+              <Grid.Col key={name}>
                 <TextInput
                   name={name}
                   label={label}
@@ -87,7 +87,7 @@ function renderFields(
             );
           case "number":
             return (
-              <Grid.Col key={name} span={6}>
+              <Grid.Col key={name}>
                 <NumberInput
                   name={name}
                   label={label}
@@ -99,7 +99,7 @@ function renderFields(
             );
           case "date":
             return (
-              <Grid.Col key={name} span={6}>
+              <Grid.Col key={name}>
                 <DateInput
                   name={name}
                   label={label}
@@ -122,13 +122,15 @@ function renderFields(
                 .then((data) => setListData(data))
                 .finally(() => setIsLoading(false));
             }, [list_type]);
+            //console.log(defaults[name]);
             return (
-              <Grid.Col key={name} span={6}>
+              <Grid.Col key={name}>
                 <Select
                   name={name}
                   label={label}
                   data={listData}
-                  defaultValue={defaults ? defaults[name] : undefined}
+                  defaultValue={"Parker"}
+                  clearable
                 />
               </Grid.Col>
             );

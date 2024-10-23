@@ -15,7 +15,6 @@ import {
 } from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
 import logo from "~/assets/img/logo.png";
-import { hashPassword } from "~/utils/auth";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {

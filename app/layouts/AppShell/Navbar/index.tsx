@@ -1,10 +1,16 @@
 import { NavLink } from "@mantine/core";
 import { useLocation } from "@remix-run/react";
-import { InlineInputClasses } from "node_modules/@mantine/core/lib/components/InlineInput";
 import classes from "./Navbar.module.css";
+import { Icon, IconProps } from "@tabler/icons-react";
+
+export interface ILink {
+  label: string;
+  to: string;
+  icon: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<Icon>>;
+}
 
 interface INavbar {
-  links: any[];
+  links: ILink[];
 }
 
 export default function Navbar({ links }: INavbar) {
@@ -12,13 +18,13 @@ export default function Navbar({ links }: INavbar) {
 
   return (
     <>
-      {links.map((item) => (
+      {links.map(({ label, to, icon: Icon }) => (
         <NavLink
-          key={item.label}
-          href={item.to}
-          label={item.label}
-          leftSection={item.icon}
-          data-active={item.to === location.pathname || undefined}
+          key={label}
+          href={to}
+          label={label}
+          leftSection={<Icon size="1rem" stroke={1.5} />}
+          data-active={to === location.pathname || undefined}
           variant="filled"
           className={classes.navLink}
           color="var(--mantine-color-body)"

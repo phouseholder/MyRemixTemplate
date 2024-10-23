@@ -8,7 +8,7 @@ import { MetaFunction } from "@remix-run/node";
 export const meta: MetaFunction = () => {
   return [
     { title: "Dashboard" },
-    { name: "this is the main dashboard", content: "Dashboard" },
+    { name: "Dashboard", content: "Dashboard of the application" },
   ];
 };
 

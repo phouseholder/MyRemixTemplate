@@ -4,14 +4,14 @@ import database from "~/postgrest/database";
 import MyAppShell from "~/layouts/AppShell";
 import { useLoaderData } from "@remix-run/react";
 import { ActionFunctionArgs, MetaFunction, json } from "@remix-run/node";
-import { TableSort } from "~/components/TableSort";
+import { TableSort } from "~/components";
 import { orderFields } from "~/models/order";
 import { handleCRUD } from "~/utils/crud";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "orders" },
-    { name: "orders", content: "orders of your application" },
+    { title: "Orders" },
+    { name: "Orders", content: "Orders of your application" },
   ];
 };
 
