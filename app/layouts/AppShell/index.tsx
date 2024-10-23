@@ -44,12 +44,10 @@ export default function MyAppShell({ children }: IMyAppShellProps) {
                   onClick={toggleNav}
                   className={classes.navbarToggle}
                   variant="transparent"
+                  color="gray"
+                  size={30}
                 >
-                  {nav ? (
-                    <IconChevronRight size="1rem" stroke={1.5} />
-                  ) : (
-                    <IconChevronLeft size="1rem" stroke={1.5} />
-                  )}
+                  {nav ? <IconChevronRight /> : <IconChevronLeft />}
                 </ActionIcon>
               )}
             </Group>

@@ -17,7 +17,7 @@ const Configuration = () => {
         <ColorSchemeToggle />
       </Drawer>
 
-      <ActionIcon variant="transparent" onClick={open} size={30}>
+      <ActionIcon variant="transparent" onClick={open} size={30} color="gray">
         <IconSettingsFilled />
       </ActionIcon>
     </>
