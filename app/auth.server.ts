@@ -39,7 +39,7 @@ authenticator.use(
     }
 
     // Check the user's password
-    const isPasswordValid = checkPassword(password, user.password);
+    const isPasswordValid = await checkPassword(password, user.password);
 
     if (!isPasswordValid) {
       throw new Error("Invalid password");

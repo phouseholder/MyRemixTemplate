@@ -1,7 +1,5 @@
 import { scrypt, randomBytes } from "crypto";
 import { promisify } from "util";
-import { getSession } from "session.server";
-import { redirect } from "@remix-run/node";
 
 const scryptAsync = promisify(scrypt);
 

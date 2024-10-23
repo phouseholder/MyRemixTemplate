@@ -50,7 +50,7 @@ npm run dev
 Navigate to http://localhost:5173 and use the following credentials to authenticate:
 
 - username: **admin**
-- password: **1**
+- password: **password**
 
 ## Available Components
 
