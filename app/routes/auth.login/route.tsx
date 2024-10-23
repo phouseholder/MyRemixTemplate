@@ -15,6 +15,8 @@ import {
 } from "@mantine/core";
 import { IconInfoCircle } from "@tabler/icons-react";
 import logo from "~/assets/img/logo.png";
+import { useDisclosure } from "@mantine/hooks";
+import { MyModal, MyForm } from "~/components";
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await authenticator.isAuthenticated(request, {
@@ -44,6 +46,8 @@ export async function action({
 export default function Auth() {
   const actionData = useActionData<typeof action>();
   const { error } = useLoaderData<typeof loader>();
+  const [opened, { open, close }] = useDisclosure();
+
   const errorIcon = <IconInfoCircle />;
 
   return (
@@ -79,15 +83,21 @@ export default function Auth() {
               type="password"
               required
             />
-            <Group justify="right">
+            <Group justify="justify-between" grow>
+              <Button mt="md" variant="subtle" onClick={open}>
+                Need an Account?
+              </Button>
               <Button mt="md" type="submit">
-                Submit
+                Log In
               </Button>
             </Group>
             {actionData && <Alert color="red">Unable to sign in</Alert>}
           </Form>
         </Paper>
       </Stack>
+      <MyModal opened={opened} close={close}>
+        Sign Up
+      </MyModal>
     </Flex>
   );
 }
