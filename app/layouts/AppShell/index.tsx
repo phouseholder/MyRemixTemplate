@@ -1,22 +1,17 @@
 import {
+  ActionIcon,
   AppShell,
   Burger,
   Stack,
   Image,
-  ScrollArea,
-  Divider,
   Flex,
+  Group,
 } from "@mantine/core";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import {
-  IconClipboardList,
-  IconDashboard,
-  IconLogout,
-  IconUsers,
-} from "@tabler/icons-react";
 import logo from "~/assets/img/logo.png";
-import Navbar, { ILink } from "./Navbar";
-
+import Navbar from "./Navbar";
+import { footerLinks, links } from "./links";
 import classes from "./AppShell.module.css";
 import Configuration from "./Configuration";
 
@@ -26,48 +21,38 @@ interface IMyAppShellProps {
 
 export default function MyAppShell({ children }: IMyAppShellProps) {
   const [opened, { toggle }] = useDisclosure();
+  const [nav, { toggle: toggleNav }] = useDisclosure();
 
   const isTablet = useMediaQuery("(max-width: 48em)");
-
-  const footerLinks: ILink[] = [
-    {
-      to: "/auth/logout",
-      label: "Log Out",
-      icon: IconLogout,
-    },
-  ];
-
-  const links: ILink[] = [
-    {
-      to: "/Dashboard",
-      label: "Dashboard",
-      icon: IconDashboard,
-    },
-    {
-      to: "/Customers",
-      label: "Customers",
-      icon: IconUsers,
-    },
-    {
-      to: "/Orders",
-      label: "Orders",
-      icon: IconClipboardList,
-    },
-  ];
 
   return (
     <AppShell
       header={{ height: 50 }}
       navbar={{
-        width: 300,
+        width: nav ? 50 : 300,
         breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
     >
-      <AppShell.Header>
+      <AppShell.Header className={classes.header}>
         <Flex justify="space-between" h="100%" pl="md" pr="md">
           <Stack justify="center">
-            <Image src={logo} w={75} />
+            <Group>
+              <Image src={logo} w={75} />
+              {!isTablet && (
+                <ActionIcon
+                  onClick={toggleNav}
+                  className={classes.navbarToggle}
+                  variant="transparent"
+                >
+                  {nav ? (
+                    <IconChevronRight size="1rem" stroke={1.5} />
+                  ) : (
+                    <IconChevronLeft size="1rem" stroke={1.5} />
+                  )}
+                </ActionIcon>
+              )}
+            </Group>
           </Stack>
           <Stack justify="center">
             <Burger
@@ -82,12 +67,11 @@ export default function MyAppShell({ children }: IMyAppShellProps) {
       </AppShell.Header>
 
       <AppShell.Navbar className={classes.navbar}>
-        <AppShell.Section grow component={ScrollArea}>
-          <Navbar links={links} />
+        <AppShell.Section grow>
+          <Navbar links={links} hideLabel={nav && !isTablet} />
         </AppShell.Section>
-        <Divider />
         <AppShell.Section>
-          <Navbar links={footerLinks} />
+          <Navbar links={footerLinks} hideLabel={nav && !isTablet} />
         </AppShell.Section>
       </AppShell.Navbar>
 

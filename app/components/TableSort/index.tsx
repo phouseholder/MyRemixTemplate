@@ -215,7 +215,7 @@ export default function TableSort({
           Create
         </Button>
         <TextInput
-          placeholder="Search by any field"
+          placeholder="Search"
           size="xs"
           w="30%"
           leftSection={

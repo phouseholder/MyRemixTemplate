@@ -1,8 +1,14 @@
 .main {
-    background-color: light-dark(#ebebeb, var(--mantine-color-dark-9));
+  background-color: light-dark(#ebebeb, var(--mantine-color-dark-9));
+  //transition: ease-in-out 0.4s;
 }
 .navbar {
-    background-color: #d90202;
-    color: white;
-    font-weight: 700;
+  background-color: #d90202;
+  color: white;
+  font-weight: 700;
+  border: none;
+  //transition: ease-in-out 0.2s;
+}
+.header {
+  border: none;
 }
