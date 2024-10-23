@@ -129,7 +129,7 @@ function renderFields(
                   name={name}
                   label={label}
                   data={listData}
-                  defaultValue={"Parker"}
+                  defaultValue={defaults ? defaults[name] : undefined}
                   clearable
                 />
               </Grid.Col>
